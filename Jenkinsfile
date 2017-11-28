@@ -17,7 +17,7 @@ pipeline {
             builds["${node_name}"] = {
               node {
                 stage("Build Test ${node_name}") {
-                  docker.image('px4io/px4-dev-nuttx:2017-10-23').inside("--env CCACHE_DIR=/tmp/ccache --volume=/tmp/ccache:/tmp/ccache:rw --env CI=true") {
+                  docker.image('px4io/px4-dev-nuttx:2017-10-23').inside("--env CCACHE_DIR=/mnt/ccache --volume=/mnt/ccache:/mnt/ccache:rw --env CCACHE_TEMPDIR=/tmp/ccache --env CI=true") {
                     stage("${node_name}") {
                       checkout scm
                       sh "ccache -z; make clean; make ${node_name}; ccache -s"
@@ -35,7 +35,7 @@ pipeline {
             builds["${node_name}"] = {
               node {
                 stage("Build Test ${node_name}") {
-                  docker.image('px4io/px4-dev-nuttx:2017-10-23').inside("--env CCACHE_DIR=/tmp/ccache --volume=/tmp/ccache:/tmp/ccache:rw --env CI=true") {
+                  docker.image('px4io/px4-dev-nuttx:2017-10-23').inside("--env CCACHE_DIR=/mnt/ccache --volume=/mnt/ccache:/mnt/ccache:rw --env CCACHE_TEMPDIR=/tmp/ccache --env CI=true") {
                     stage("${node_name}") {
                       checkout scm
                       sh "ccache -z; make clean; make ${node_name}; ccache -s"
@@ -52,7 +52,7 @@ pipeline {
             builds["${node_name}"] = {
               node {
                 stage("Build Test ${node_name}") {
-                  docker.image('px4io/px4-dev-raspi:2017-10-23').inside("--env CCACHE_DISABLE=1 --env CI=true") {
+                  docker.image('px4io/px4-dev-raspi:2017-10-23').inside("--env CCACHE_DIR=/mnt/ccache --volume=/mnt/ccache:/mnt/ccache:rw --env CCACHE_TEMPDIR=/tmp/ccache --env CI=true") {
                     stage("${node_name}") {
                       checkout scm
                       sh "make clean; make ${node_name}"
@@ -69,7 +69,7 @@ pipeline {
             builds["${node_name}"] = {
               node {
                 stage("Build Test ${node_name}") {
-                  docker.image('px4io/px4-dev-armhf:2017-10-23').inside("--env CCACHE_DISABLE=1 --env CI=true") {
+                  docker.image('px4io/px4-dev-armhf:2017-10-23').inside("--env CCACHE_DIR=/mnt/ccache --volume=/mnt/ccache:/mnt/ccache:rw --env CCACHE_TEMPDIR=/tmp/ccache --env CI=true") {
                     stage("${node_name}") {
                       checkout scm
                       sh "make clean; make ${node_name}"
@@ -90,7 +90,7 @@ pipeline {
           agent {
             docker {
               image 'px4io/px4-dev-base:2017-10-23'
-              args '--env CCACHE_DIR=/tmp/ccache --volume=/tmp/ccache:/tmp/ccache:rw --env CI=true'
+              args '--env CCACHE_DIR=/mnt/ccache --volume=/mnt/ccache:/mnt/ccache:rw --env CCACHE_TEMPDIR=/tmp/ccache --env CI=true'
             }
           }
           steps {
@@ -101,7 +101,7 @@ pipeline {
           agent {
             docker {
               image 'px4io/px4-dev-clang:2017-10-23'
-              args '--env CCACHE_DIR=/tmp/ccache --volume=/tmp/ccache:/tmp/ccache:rw --env CI=true'
+              args '--env CCACHE_DIR=/mnt/ccache --volume=/mnt/ccache:/mnt/ccache:rw --env CCACHE_TEMPDIR=/tmp/ccache --env CI=true'
             }
           }
           steps {
@@ -112,7 +112,7 @@ pipeline {
           agent {
             docker {
               image 'px4io/px4-dev-base:2017-10-23'
-              args '--env CCACHE_DIR=/tmp/ccache --volume=/tmp/ccache:/tmp/ccache:rw --env CI=true'
+              args '--env CCACHE_DIR=/mnt/ccache --volume=/mnt/ccache:/mnt/ccache:rw --env CCACHE_TEMPDIR=/tmp/ccache --env CI=true'
             }
           }
           steps {
@@ -124,7 +124,7 @@ pipeline {
           agent {
             docker {
               image 'px4io/px4-dev-base:2017-10-23'
-              args '--env CCACHE_DIR=/tmp/ccache --volume=/tmp/ccache:/tmp/ccache:rw --env CI=true'
+              args '--env CCACHE_DIR=/mnt/ccache --volume=/mnt/ccache:/mnt/ccache:rw --env CCACHE_TEMPDIR=/tmp/ccache --env CI=true'
             }
           }
           steps {
